@@ -75,3 +75,55 @@ Slack_Send_Message
 1;
 
 ###############################################################################
+
+=pod
+=begin html
+
+<a name="Slack"></a>
+<h3>Slack</h3>
+<ul>
+  This module allows FHEM to communicate to a Slack channel as a bot.
+  <br>
+  <br>
+  You have to create a bot for your team first and obtain the API token.
+  
+  <br><br>
+  <a name="Slackdefine"></a>
+  <b>Define</b>
+  <ul>
+    <code>define &lt;name&gt; Slack &lt;token&gt; &lt;user&gt; &lt;channel&gt;</code>
+  <br>
+  <br>
+  &lt;token&gt; is the API token
+  <br>
+  &lt;user&gt; is the user name
+  <br>
+  &lt;channel&gt; is the channel to post to (without #)
+=end html
+
+=begin html_DE
+
+<a name="Slack"></a>
+<h3>Slack</h3>
+<ul>
+  Dieses Modul erlaubt es FHEM, über Slack als Bot zu kommunizieren.
+  <br>
+  <br>
+  Es muss zuvor ein Bot angelegt worden sein und der API-Key wird benötigt.
+  
+  <br><br>
+  <a name="Slackdefine"></a>
+  <b>Define</b>
+  <ul>
+    <code>define &lt;name&gt; Slack &lt;token&gt; &lt;user&gt; &lt;channel&gt;</code>
+  <br>
+  <br>
+  &lt;token&gt; ist das API-Token
+  <br>
+  &lt;user&gt; ist der Name
+  <br>
+  &lt;channel&gt; ist der Channel (ohne #)
+
+=end html_DE
+
+=cut
