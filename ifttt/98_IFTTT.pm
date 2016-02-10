@@ -54,24 +54,23 @@ IFTTT_TriggerEvent
 	my $ua = LWP::UserAgent->new;
 	$ua->timeout(15);
 
-	my resp;
+	my $resp;
 	
 	if ($val)
 	{
-		$resp = $ua->post(url, ['value1' => $val]);
+		$resp = $ua->post($url, ['value1' => $val]);
 	}
 	else
 	{
-		$resp = $ua->get(url);
+		$resp = $ua->get($url);
 	}
-	
   
 	if ($resp->is_success) {
-	  	Log3 $hash->{NAME}, 4, "Success in sending IFTTT message: ". $resp->content;
+	  	Log3 $hash->{NAME}, 4, "Success in sending IFTTT message $url: ". $resp->content;
 		return;
 	}
 	 else {
-	  	Log3 $hash->{NAME}, 2, "Error sending IFTTT message: ". $resp->status_line;
+	  	Log3 $hash->{NAME}, 2, "Error sending IFTTT message $url: ". $resp->status_line;
 	}
 }
 
@@ -100,7 +99,7 @@ IFTTT_TriggerEvent
 
 =begin html_DE
 
-<a name="Slack"></a>
+<a name="IFTTT"></a>
 <h3>Slack</h3>
 <ul>
   Dieses Modul erlaubt es FHEM, mit IFTTT zu kommunizieren.

@@ -113,4 +113,21 @@ calviewrg_createTimeRg
     fhem("defmod $rg readingsGroup $def");
 }
 
+sub
+calviewrg_contains
+{
+	my ($event,$calendar,$field,$val) = @_;  
+	my @eventarr = split(/.*:\s/,$event);
+	my $evtpart1 = $evtarr[1];
+	my @uids = split(/;/,$evtpart1);
+    my $re = qr/$val/;
+	foreach my $uid (@uids) {
+		my $caltext = fhem("get $calendar $field uid=$uid 1");
+		if ($caltext =~ $re) {
+          return true;
+		}
+	}
+    return false;
+}
+
 1;
