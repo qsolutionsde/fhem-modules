@@ -3,7 +3,6 @@
 package main;
 use LWP::UserAgent;
 use HTTP::Request::Common qw(POST);
-use LWP::UserAgent;
 use JSON;
 
 sub
@@ -51,15 +50,29 @@ sub
 Slack_Send_Message
 {
 	my $hash = shift;
-	my $msg = join(" ", @_);
-	$msg =~ s/\_/\n/g;
 
+	my $channel = $hash->{channel};
+	my $msg = shift;
+
+	if ($msg =~ /^@/)
+	{
+		$channel = substr($msg,1);
+		$msg = '';
+	}
+	
+	$msg =~ s/\_/\n/g;
+	$msg .=  join(" ", @_);	
+
+	if ($msg =~ /^{/) {
+        $msg = eval($msg);
+    }
+    
+	
 	my $ua = LWP::UserAgent->new;
 	$ua->timeout(15);
 
 	my $token = $hash->{token};
 	my $user = $hash->{user};
-	my $channel = $hash->{channel};
 	
 	my $resp = $ua->post("https://slack.com/api/chat.postMessage", ['token' => $token, 'username' => $user, 'channel' => "#$channel", 'text' => $msg]);
   
