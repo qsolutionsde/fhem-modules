@@ -48,22 +48,12 @@ sub
 IFTTT_TriggerEvent
 {
 	my ($hash,$event,$val) = @_;
-	my $key = $hash->{key};
     
-	my $url = "https://maker.ifttt.com/trigger/$event/with/key/$key";
+	my $url = "https://maker.ifttt.com/trigger/$event/with/key/$hash->{key}";
 	my $ua = LWP::UserAgent->new;
 	$ua->timeout(15);
 
-	my $resp;
-	
-	if ($val)
-	{
-		$resp = $ua->post($url, ['value1' => $val]);
-	}
-	else
-	{
-		$resp = $ua->get($url);
-	}
+	my $resp = $val ? $ua->post($url, ['value1' => $val]) : $resp = $ua->get($url);
   
 	if ($resp->is_success) {
 	  	Log3 $hash->{NAME}, 4, "Success in sending IFTTT message $url: ". $resp->content;
